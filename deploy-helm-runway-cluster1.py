@@ -24,7 +24,7 @@ command = "export KUBECONFIG=/home/vmware/kubeconfig.yaml; helm --kubeconfig=/ho
 
 ssh = paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-ssh.connect(host, port, username, password)
+ssh.connect(host, port, username, password,banner_timeout=200)
 stdin, stdout, stderr = ssh.exec_command(command)
 #print (stdout.read())
 for line in stdout.readlines():
