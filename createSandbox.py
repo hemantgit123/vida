@@ -6,7 +6,7 @@ import json
 import time
 import random
 # defining the api-endpoint for sandbox ceration
-POST_API_ENDPOINT = "https://vida.esp-staging.vmware-aws.com/api/v1/vida/sandbox"
+POST_API_ENDPOINT = "https://vida.esp-staging.vmware-aws.com/vida/api/v1/sandbox/"
 
 # data to be sent to api 
 
@@ -28,11 +28,14 @@ r_dictionary= r.json()
 
 time.sleep(random.randint(5, 20))
 
-GET_API_ENDPOINT = "https://vida.esp-staging.vmware-aws.com/api/v1/vida/sandbox"+ "/"+ str (r_dictionary['id'])
+GET_API_ENDPOINT = "https://vida.esp-staging.vmware-aws.com/vida/api/v1/sandbox/"+ "/"+ str (r_dictionary['id'])
 r = requests.get(url = GET_API_ENDPOINT)
 
 print ("===================Sandbox Created============\n")
-print (r.text)
+json_data = json.loads(r.text)
+print ("clivmExternalIP:",json_data['clivmExternalIP'])
+print ("clivmExternalPort:",json_data['clivmExternalPort'])
+print ("clivmPemFileURL:",json_data['clivmPemFileURL'])
 
 
 
