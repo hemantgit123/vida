@@ -38,5 +38,18 @@ print ("clivmExternalPort:",json_data['clivmExternalPort'])
 print ("clivmPemFileURL:",json_data['clivmPemFileURL'])
 
 
+sample_dict={}
+
+sample_dict["clivmExternalIP"]=json_data['clivmExternalIP']
+sample_dict["clivmExternalPort"]=json_data['clivmExternalPort']
+sample_dict["clivmPemFileURL"]=json_data['clivmPemFileURL']
+
+tkg_version=1.1
+file_name="sandbox_"+str(tkg_version)+".json"
+
+with open(file_name, "w") as write_file:
+    json.dump(sample_dict, write_file)
+
+
 
 
