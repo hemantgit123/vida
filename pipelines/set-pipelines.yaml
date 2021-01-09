@@ -1,0 +1,31 @@
+---
+resources:
+  - name: concourse-examples
+    type: git
+    icon: github
+    source:
+      uri: https://github.com/hemantgit123/vida
+
+jobs:
+  # update this pipeline before updating child pipelines
+  - name: set-self
+    public: true
+    plan:
+      - get: concourse-examples
+        trigger: true
+      - set_pipeline: set-pipelines
+        file: concourse-examples/pipelines/set-pipelines.yml
+  - name: set-example-pipelines
+    public: true
+    plan:
+      - get: concourse-examples
+        trigger: true
+        passed: [set-self]
+      - set_pipeline: job
+        file: concourse-examples/pipelines/hello-world.yml
+      - set_pipeline: pipeline-vars
+        file: concourse-examples/pipelines/pipeline-vars.yml
+        vars:
+          first: initial
+          number: "9000"
+          hello: HAL
